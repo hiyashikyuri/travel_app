@@ -9,19 +9,21 @@ class PlaceCard extends StatelessWidget {
     Key key,
     @required this.travelSpot,
     @required this.press,
+    this.isFullCard = false,
   }) : super(key: key);
 
   final TravelSpot travelSpot;
   final GestureTapCallback press;
+  final bool isFullCard;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: getProportionateScreenWidth(137),
+      width: getProportionateScreenWidth(isFullCard ? 158 : 137),
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: 1.29,
+            aspectRatio: isFullCard ? 1.09 : 1.29,
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -33,7 +35,7 @@ class PlaceCard extends StatelessWidget {
             ),
           ),
           Container(
-            width: getProportionateScreenWidth(137),
+            width: getProportionateScreenWidth(isFullCard ? 158 : 137),
             padding:
             EdgeInsets.all(getProportionateScreenWidth(kDefaultPadding)),
             decoration: BoxDecoration(
@@ -48,7 +50,8 @@ class PlaceCard extends StatelessWidget {
               children: [
                 Text(
                   travelSpot.name,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: isFullCard ? 17 : 12, fontWeight: FontWeight.w600),
                 ),
                 VerticalSpacing(of: 10),
                 Travelers(users: travelSpot.users,),
